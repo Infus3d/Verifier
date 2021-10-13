@@ -1,0 +1,33 @@
+module regfile(RP2, RP1, RP0, RQ2, RQ1, RQ0, WA2, WA1, WA0, LD_DATA, WR, CLRN, CLK, DATAP3, DATAP2, DATAP1, DATAP0, DATAQ3, DATAQ2, DATAQ1, DATAQ0);
+	input RP2, RP1, RP0, RQ2, RQ1, RQ0, WA2, WA1, WA0, WR, CLRN, CLK;
+	input [3:0] LD_DATA;
+	output DATAP3, DATAP2, DATAP1, DATAP0, DATAQ3, DATAQ2, DATAQ1, DATAQ0;
+	wire [3:0] DATAP, DATAQ;
+	wire [7:0] YY;
+	wire [3:0] VALUE0, VALUE1, VALUE2, VALUE3, VALUE4, VALUE5, VLAUE6, VALUE7;
+	
+	Decoder3to8 my_decoder(.W({WA2, WA1, WA0}), .EN(WR), .Y(YY));
+	
+	reg4 myregister0 (.IN(LD_DATA), .LD(YY[0]), .CLK(CLK), .OUT(VALUE0), .CLRN(CLRN));
+	reg4 myregister1 (.IN(LD_DATA), .LD(YY[1]), .CLK(CLK), .OUT(VALUE1), .CLRN(CLRN));
+	reg4 myregister2 (.IN(LD_DATA), .LD(YY[2]), .CLK(CLK), .OUT(VALUE2), .CLRN(CLRN));
+	reg4 myregister3 (.IN(LD_DATA), .LD(YY[3]), .CLK(CLK), .OUT(VALUE3), .CLRN(CLRN));
+	reg4 myregister4 (.IN(LD_DATA), .LD(YY[4]), .CLK(CLK), .OUT(VALUE4), .CLRN(CLRN));
+	reg4 myregister5 (.IN(LD_DATA), .LD(YY[5]), .CLK(CLK), .OUT(VALUE5), .CLRN(CLRN));
+	reg4 myregister6 (.IN(LD_DATA), .LD(YY[6]), .CLK(CLK), .OUT(VALUE6), .CLRN(CLRN));
+	reg4 myregister7 (.IN(LD_DATA), .LD(YY[7]), .CLK(CLK), .OUT(VALUE7), .CLRN(CLRN));
+	
+	Mux8_4b my_muxP (.W0(VALUE0), .W1(VALUE1), .W2(VALUE2), .W3(VALUE3), .W4(VALUE4), .W5(VALUE5), .W6(VALUE6), .W7(VALUE7), .S({RP0, RP1, RP2}), .F(DATAP));
+	Mux8_4b my_muxQ (.W0(VALUE0), .W1(VALUE1), .W2(VALUE2), .W3(VALUE3), .W4(VALUE4), .W5(VALUE5), .W6(VALUE6), .W7(VALUE7), .S({RQ0, RQ1, RQ2}), .F(DATAQ));
+	
+	assign DATAP3 = DATAP[3]; 
+	assign DATAP2 = DATAP[2]; 
+	assign DATAP1 = DATAP[1]; 
+	assign DATAP0 = DATAP[0];
+	
+	assign DATAQ3 = DATAQ[3]; 
+	assign DATAQ2 = DATAQ[2]; 
+	assign DATAQ1 = DATAQ[1]; 
+	assign DATAQ0 = DATAQ[0];
+
+endmodule	

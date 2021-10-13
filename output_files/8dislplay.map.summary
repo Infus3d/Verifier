@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Thu Dec 12 22:55:03 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Revision Name : 8dislplay
+Top-level Entity Name : 8dislplay
+Family : Cyclone IV E
+Total logic elements : 155
+    Total combinational functions : 123
+    Dedicated logic registers : 35
+Total registers : 35
+Total pins : 72
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
